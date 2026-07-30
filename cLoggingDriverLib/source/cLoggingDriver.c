@@ -75,9 +75,9 @@ uint8_t const * getModuleVersionString( void )
  * @param memoryAddress The starting address of the memory to be used by the logging driver.
  * @param memorySizeInBytes Size of the memory in bytes
  * @param maxLogCount The maximum number of log messages that can be stored in the logging driver.
- * @return sErrorInfo_t structure containing the error information if an error occurred.
+ * @return sErrorCompact_t structure containing the error information if an error occurred.
  */
-sErrorInfo_t initLoggingDriver( uint16_t * readMemory, 
+sErrorCompact_t initLoggingDriver( uint16_t * readMemory, 
                                 uint16_t * writeMemory,
                                 uint16_t * stdOutputFunction,
                                 uint8_t  * scratchBuffer,
@@ -88,7 +88,7 @@ sErrorInfo_t initLoggingDriver( uint16_t * readMemory,
                                 uint16_t const memorySizeInBytes,
                                 uint16_t const maxLogCount )
 {
-    sErrorInfo_t retValue = BLANK_ERROR_STRUCT;
+    sErrorCompact_t retValue = BLANK_ERROR_STRUCT;
     if( THIS->isInitialized == false )
     {
         if( logFlags & )
@@ -130,16 +130,16 @@ sErrorInfo_t initLoggingDriver( uint16_t * readMemory,
  * @param logType The type of log message (e.g. error, warning, info, debug).
  * @param logFlags The flags for the log message (e.g. log to console, log to memory, log to both).
  * @param logMessage The log message to be logged.
- * @return sErrorInfo_t structure containing the error information if an error occurred.
+ * @return sErrorCompact_t structure containing the error information if an error occurred.
  */
-sErrorInfo_t logMessage( uint16_t fileModuleEnum, 
+sErrorCompact_t logMessage( uint16_t fileModuleEnum, 
                          uint16_t lineNumber,
                          eLoggingType_t logType,
                          char const * const logMessage, 
                          ... )
 
 {
-    sErrorInfo_t retValue = BLANK_ERROR_STRUCT;
+    sErrorCompact_t retValue = BLANK_ERROR_STRUCT;
 
     return retValue;
 }

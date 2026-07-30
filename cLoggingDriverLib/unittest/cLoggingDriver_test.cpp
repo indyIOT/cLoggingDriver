@@ -51,13 +51,23 @@ namespace
         }
         return returnValue;
     }
+
+    sErrorCompact_t fakeLogCallback( eLoggingType_t logType, uint16_t logKey, char const * const logMessage )
+    {
+        (void)logType;
+        (void)logKey;
+        (void)logMessage;
+        sErrorCompact_t errorInfo = BLANK_ERROR_STRUCT;
+        return errorInfo;
+    }
 } // namespace
 
 TEST( cErrorDriver, initErrorDriver )
 {
-    sErrorInfo_t errorInfo = initErrorDriver(
-        (std::uint16_t*)&fakeReadMemory,
-        (std::uint16_t*)&fakeWriteMemory,
+    sErrorCompact_t errorInfo = initErrorDriver(
+        (readMemoryFunctionPtr_t)&fakeReadMemory,
+        (writeMemoryFunctionPtr_t)&fakeWriteMemory,
+        (logCallback_t)&fakeLogCallback,
         0U,
         sizeof( gFakeMemory )
     );

@@ -15,14 +15,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-typedef enum
-{
-    LOGGING_TYPE_CRITICAL= 0U,
-    LOGGING_TYPE_ERROR   = 1U,
-    LOGGING_TYPE_WARNING = 2U,
-    LOGGING_TYPE_INFO    = 3U,
-    LOGGING_TYPE_DEBUG   = 4U
-} eLoggingType_t;
+
 
 typedef union
 {

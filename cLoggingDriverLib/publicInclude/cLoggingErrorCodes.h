@@ -33,7 +33,7 @@ typedef enum
  * @param errorMessage Pointer to a buffer to store the error message.
  * @returns A pointer to the error message string.
  */
-extern sErrorInfo_t getLoggingErrorMessageFromErrorCode( uint16_t const errorCode,
+extern sErrorCompact_t getLoggingErrorMessageFromErrorCode( uint16_t const errorCode,
                                                         uint8_t const * errorMessage );
 
                                                         

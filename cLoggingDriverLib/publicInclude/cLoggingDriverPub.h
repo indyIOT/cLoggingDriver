@@ -10,7 +10,6 @@
 #include <string.h>
 #include <stdarg.h>
 #include "cLoggingConfig.h"
-#include "cErrorDriverPub.h"
 #include "commonTypes.h"
 #include "commonMacros.h"
 
@@ -41,11 +40,11 @@ typedef struct
 #define LOG_ERROR( message, ... )    logMessage( THIS->_driverControl._driverInfo._moduleID, \
                                                     __LINE__, \
                                                     LOGGING_TYPE_ERROR, \
-#                                                    message, ##__VA_ARGS__ )
+                                                    message, ##__VA_ARGS__ )
 #define LOG_WARNING( message, ... )  logMessage( THIS->_driverControl._driverInfo._moduleID, \
                                                     __LINE__, \
                                                     LOGGING_TYPE_WARNING, \
-#                                                    message, ##__VA_ARGS__ )
+                                                    message, ##__VA_ARGS__ )
 #define LOG_INFO( message, ... )     logMessage( THIS->_driverControl._driverInfo._moduleID, \
                                                     __LINE__, \
                                                     LOGGING_TYPE_INFO, message, ##__VA_ARGS__ )
@@ -60,9 +59,9 @@ typedef struct
  * @param logType The type of log message (e.g. error, warning, info, debug).
  * @param logFlags The flags for the log message (e.g. log to console, log to memory, log to both).
  * @param logMessage The log message to be logged.
- * @return sErrorInfo_t structure containing the error information if an error occurred.
+ * @return sErrorCompact_t structure containing the error information if an error occurred.
  */
-sErrorInfo_t logMessage( uint16_t fileModuleEnum, 
+sErrorCompact_t logMessage( uint16_t fileModuleEnum, 
                          uint16_t lineNumber,
                          eLoggingType_t logType,
                          char const * const logMessage, 
@@ -74,7 +73,7 @@ sErrorInfo_t logMessage( uint16_t fileModuleEnum,
  * @param errorCount Pointer to a uint16_t variable to store the number of log messages.
  * @return An error if one occurrred.
  */
-extern sErrorInfo_t getLogCount( uint16_t * const errorCount );
+extern sErrorCompact_t getLogCount( uint16_t * const errorCount );
 
 /**
  * @brief Function to clear all log messages from the logging driver.
@@ -99,17 +98,18 @@ extern void printAllLogMessages( void );
  * @param memorySizeInBytes Size of the memory in bytes
  * @param maxLogCount The maximum number of log messages that can be stored in the logging driver.
  *                    regardless of memory.
- * @return sErrorInfo_t structure containing the error information if an error occurred.
+ * @return sErrorCompact_t structure containing the error information if an error occurred.
  */
-extern sErrorInfo_t initLoggingDriver( uint16_t * readMemory, 
-                                       uint16_t * writeMemory,
-                                       uint16_t * stdOutputFunction,
-                                       uint8_t  * scratchBuffer,
-                                       uLoggingFlags_t logFlags,
-                                       size_t   const scratchBufferSize,
-                                       uint32_t const memoryAddress,
-                                       uint16_t const memorySizeInBytes,
-                                       uint16_t const maxLogCount );
+extern sErrorCompact_t initLoggingDriver( 
+                                          uint16_t * readMemory, 
+                                          uint16_t * writeMemory,
+                                          uint16_t * stdOutputFunction,
+                                          uint8_t  * scratchBuffer,
+                                          uLoggingFlags_t logFlags,
+                                          size_t   const scratchBufferSize,
+                                          uint32_t const memoryAddress,
+                                          uint16_t const memorySizeInBytes,
+                                          uint16_t const maxLogCount );
 
 /**
  * @brief Function to get the logging driver information. This will return a structure containing the logging driver information.
