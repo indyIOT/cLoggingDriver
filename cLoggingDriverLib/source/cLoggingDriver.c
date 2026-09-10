@@ -15,18 +15,12 @@
 #include "cLoggingDriverVersion.h"
 #include "cLoggingErrorCodes.h"
 
-#ifndef ERROR_NONE
-#define ERROR_NONE 0U
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
-#ifndef NO_ERROR
-#define NO_ERROR 0U
-#endif
-
- 
-static const uint8_t moduleName[] = "LoggingDriver";
-
-
+/******************************** Type definitions ****************************/
 typedef struct
 {
     uint16_t * readMemory; /* Pointer to a function that reads memory for the error driver */
@@ -42,28 +36,37 @@ typedef struct
     bool isInitialized; /* Whether or not the error driver has been initialized */
 } sLoggingDriverControlStruct_t;
 
+/********************************Static functions Prototypes *************/
+
+
+/******************************** Static Global Variables **********************/
+static const uint8_t moduleName[] = "cLoggingDriver";
+#define MODULE_ID 10975
+
+
+
+
+
+
+
+
+
+
 
 static sLoggingDriverControlStruct_t loggingDriverControl = { NULL, NULL, NULL, 0, 0, 0, NULL, 0, moduleName, 0, false };
 static sLoggingDriverControlStruct_t * const THIS = &loggingDriverControl;
 
-/** 
- * @brief Get the name of the logging module.
- * @return Pointer to a string containing the module name.
- */
-uint8_t const * const getModuleName( void )
-{
-    return (uint8_t const * const)moduleName;
-}
 
-/**
- * @brief Get the version string of the logging module.
- * @return Pointer to a string containing the version of the module.
- */
-uint8_t const * getModuleVersionString( void )
-{
-    return (uint8_t const *)ERROR_DRIVER_VERSION_STRING;
-}
+/**************************** HELPER MACROS ************************************/
+#ifndef ERROR_NONE
+#define ERROR_NONE 0U
+#endif
 
+#ifndef NO_ERROR
+#define NO_ERROR 0U
+#endif
+
+/****************************** Function implementations ***************/
 /**
  * @brief Function to initialize the logging driver. This should be called before any other functions are used.
  * @param readMemory Pointer to a function that reads memory for the logging driver.
@@ -144,5 +147,26 @@ sErrorCompact_t logMessage( uint16_t fileModuleEnum,
     return retValue;
 }
 
+/************************ Static Function Implementations ***************/
+/** 
+ * @brief Get the name of the logging module.
+ * @return Pointer to a string containing the module name.
+ */
+uint8_t const * const getModuleName( void )
+{
+    return (uint8_t const * const)moduleName;
+}
+
+/**
+ * @brief Get the version string of the logging module.
+ * @return Pointer to a string containing the version of the module.
+ */
+uint8_t const * getModuleVersionString( void )
+{
+    return (uint8_t const *)ERROR_DRIVER_VERSION_STRING;
+}
 
 
+#ifdef __cplusplus
+}  /* extern "C" */
+#endif

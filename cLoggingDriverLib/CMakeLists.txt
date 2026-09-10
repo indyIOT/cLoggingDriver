@@ -71,8 +71,7 @@ target_include_directories(${LOGGING_DRIVER_LIBRARY_NAME}
 
 target_link_libraries(${LOGGING_DRIVER_LIBRARY_NAME}
     PUBLIC
-        commonMacros
-        cErrorDriverLib
+        commonMacros        
 )
 
 # Expose the generated header directory so consumers can #include it
