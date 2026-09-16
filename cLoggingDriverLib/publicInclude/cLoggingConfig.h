@@ -17,21 +17,6 @@ extern "C" {
 #endif
 
 
-typedef union
-{
-    /* data */
-    uint8_t _allFlags;
-    struct
-    {
-        uint8_t _logToConsole : 1;
-        uint8_t _logToMemory : 1;
-        uint8_t _logKeyAndSingleValueOnly : 1;
-        eLoggingType_t loggingLevel : 3;
-        uint8_t _reserved2 : 2;
-    } _bits;
-} uLoggingFlags_t;
-
-
 #define MAX_LOGGING_DRIVER_MESSAGE_LENGTH 256U
 #define MAX_LOGGING_DRIVER_MESSAGE_COUNT  100U
 #define DEFAULT_LOG_LEVEL                 LOGGING_TYPE_DEBUG

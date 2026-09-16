@@ -8,8 +8,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "cLoggingErrorCodes.h"
-#include "cErrorDriverPub.h"
+#include "commonTypes.h"
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,18 +24,6 @@ extern "C" {
 /******************************** Static Global Variables **********************/
 static const uint8_t moduleName[] = "cLoggingErrors";
 #define MODULE_ID 15856
-
-
-
-
-
-
-
-
-
-
-
-
 
 /**************************** HELPER MACROS ************************************/
 #ifndef ERROR_NONE
@@ -54,7 +42,7 @@ static const uint8_t moduleName[] = "cLoggingErrors";
  * @returns A pointer to the error message string.
  */
 sErrorCompact_t getLoggingErrorMessageFromErrorCode( uint16_t const errorCode,
-                                                        uint8_t const * errorMessage )
+                                                     uint8_t const * errorMessage )
 {
     sErrorCompact_t retValue = BLANK_ERROR_STRUCT;
 

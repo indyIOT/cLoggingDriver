@@ -15,16 +15,7 @@
 extern "C" {
 #endif
 
-
-/**
- * @brief Function to get the error message corresponding to a common error code.
- * @param errorCode The common error code to get the message for.
- * @param errorMessage Pointer to a buffer to store the error message.
- * @returns A pointer to the error message string.
- */
-extern sErrorCompact_t getLoggingErrorMessageFromErrorCode( uint16_t const errorCode,
-                                                        uint8_t const * errorMessage );
-                                                        
+                                        
 #ifdef __cplusplus
 }  /* extern "C" */
 #endif

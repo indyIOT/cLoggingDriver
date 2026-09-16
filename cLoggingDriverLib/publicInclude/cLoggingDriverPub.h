@@ -20,6 +20,9 @@ extern "C" {
 #endif
 
 /*************************************** Typedefs **************************************/
+/** 
+ * @brief Structure that contains information about a log message.
+ */
 typedef struct
 {
     uint16_t logMessageKey;
@@ -31,6 +34,28 @@ typedef struct
     char * logMessage;
     uint16_t * logMessageCrc;
 } sLoggingInfo_t;
+
+#ifndef SCOMMON_LOG_FLAGS
+#define SCOMMON_LOG_FLAGS
+/** 
+ * @brief Union that contains flags for the logging driver.
+ * the flags are used to control the behavior of the logging driver. Set only at
+ * initLoggingDriver() and not changed after that.
+ */
+typedef union
+{
+    /* data */
+    uint8_t _allFlags;
+    struct
+    {
+        uint8_t _logToConsole : 1;
+        uint8_t _logToMemory : 1;
+        uint8_t _logKeyAndSingleValueOnly : 1;
+        eLoggingType_t loggingLevel : 3;
+        uint8_t _reserved2 : 2;
+    } _bits;
+} uLoggingFlags_t;
+#endif // SCOMMON_LOG_FLAGS
 
 /**************************** HELPER MACROS ***********************************************/
 #define LOG_CRITICAL( message, ... ) logMessage( THIS->_driverControl._driverInfo._moduleID, \
@@ -100,8 +125,7 @@ extern void printAllLogMessages( void );
  *                    regardless of memory.
  * @return sErrorCompact_t structure containing the error information if an error occurred.
  */
-extern sErrorCompact_t initLoggingDriver( 
-                                          uint16_t * readMemory, 
+extern sErrorCompact_t initLoggingDriver( uint16_t * readMemory, 
                                           uint16_t * writeMemory,
                                           uint16_t * stdOutputFunction,
                                           uint8_t  * scratchBuffer,

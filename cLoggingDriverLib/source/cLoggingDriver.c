@@ -12,9 +12,10 @@
 #include "commonMacros.h"
 #include "cLoggingDriver.h"
 #include "cLoggingDriverPub.h"
+#include "cLoggingDriverConfig.h"
 #include "cLoggingDriverVersion.h"
 #include "cLoggingErrorCodes.h"
-
+#include "commonMacros.h"
 
 #ifdef __cplusplus
 extern "C" {
