@@ -44,16 +44,6 @@ typedef struct
 static const uint8_t moduleName[] = "cLoggingDriver";
 #define MODULE_ID 10975
 
-
-
-
-
-
-
-
-
-
-
 static sLoggingDriverControlStruct_t loggingDriverControl = { NULL, NULL, NULL, 0, 0, 0, NULL, 0, moduleName, 0, false };
 static sLoggingDriverControlStruct_t * const THIS = &loggingDriverControl;
 
@@ -98,14 +88,14 @@ sErrorCompact_t initLoggingDriver( uint16_t * readMemory,
         if( logFlags & )
         if( readMemory == NULL || writeMemory == NULL || stdOutputFunction == NULL || scratchBuffer == NULL )
         {
-            retValue = CREATE_ERROR( ERROR_NULL_POINTER, "" );
+            retValue = CREATE_ERROR( ERROR_NULL_POINTER, NULL );
             LOG_CRITICAL( "Logging Driver Initialization Failed: Read or Write Memory function pointer is NULL." );
         }
         else
         {
             if( memorySizeInBytes < sizeof( sLoggingInfo_t ) * maxLogCount )
             {
-                retValue = CREATE_ERROR( ERROR_INVALID_PARAMETER, "" );
+                retValue = CREATE_ERROR( ERROR_INVALID_PARAMETER, NULL );
                 LOG_CRITICAL( "Logging Driver Initialization Failed: Memory size is too small. Minimum size required is %u bytes.", sizeof( sLoggingInfo_t ) * maxLogCount );
             }
             else
@@ -120,7 +110,7 @@ sErrorCompact_t initLoggingDriver( uint16_t * readMemory,
     }
     else
     {
-        retValue = CREATE_ERROR( ERROR_ALREADY_INITIALIZED, "" );
+        retValue = CREATE_ERROR( ERROR_ALREADY_INITIALIZED, NULL );
     }
     return retValue;
 }
